@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock In</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="d-flex">
+
+  <div class="bg-success text-white p-3" style="width:220px; min-height:100vh;">
+    <h4>Fertilizer Shop</h4><hr>
+    <a href="/dashboard" class="d-block text-white mb-2 text-decoration-none">Dashboard</a>
+    <a href="/products" class="d-block text-white mb-2 text-decoration-none">Products</a>
+    <a href="/stock_in" class="d-block text-white mb-2 text-decoration-none">Stock In</a>
+    <a href="/sales" class="d-block text-white mb-2 text-decoration-none">Sales</a>
+    <a href="/suppliers" class="d-block text-white mb-2 text-decoration-none">Suppliers</a>
+    <a href="/reports" class="d-block text-white mb-2 text-decoration-none">Reports</a>
+    <a href="/backup" class="d-block text-white mb-2 text-decoration-none">Backup</a>
+    <a href="/change_password" class="d-block text-white mb-2 text-decoration-none">Change Password</a>
+    <a href="/logout" class="d-block text-white mb-2 text-decoration-none">Logout</a>
+  </div>
+
+  <div class="flex-grow-1 p-4">
+    <h3>Stock In (Purchase)</h3>
+
+    <div class="card p-3 shadow-sm mb-4">
+      <h6>Add Stock</h6>
+      <form method="POST" action="/add_stock_in" class="row g-2">
+        <div class="col-md-5">
+          <select class="form-select" name="product_id" required>
+            <option value="">Select Product</option>
+            {% for p in products %}
+              <option value="{{ p[0] }}">{{ p[1] }} (current: {{ p[2] }})</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" name="qty" type="number" min="1" placeholder="Quantity" required>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success w-100">Add Stock</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card p-3 shadow-sm">
+      <h5>Stock In History</h5>
+      <table class="table table-bordered">
+        <thead class="table-success">
+          <tr><th>ID</th><th>Product</th><th>Qty</th><th>Date</th></tr>
+        </thead>
+        <tbody>
+          {% for s in stock %}
+          <tr><td>{{ s[0] }}</td><td>{{ s[1] }}</td><td>{{ s[2] }}</td><td>{{ s[3] }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
